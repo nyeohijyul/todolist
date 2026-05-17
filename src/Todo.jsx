@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function PracticeTodo() {
+function Todo() {
   const [todos, setTodos] = useState([
     {id: 1, text: '과제하기', done: false, priority:'HIGH'},
     {id: 2, text: '공부하기', done: false, priority:'MEDIUM'},
@@ -64,4 +64,4 @@ function PracticeTodo() {
   )
 }
 
-export default PracticeTodo;
+export default Todo;
