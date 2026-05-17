@@ -1,9 +1,9 @@
 import { useState } from "react";
-import PracticeTodo from "./PracticeTodo";
+import Todo from "./Todo";
 import './App.css'
 
 function App() {
-  return <PracticeTodo />;
+  return <Todo />;
 }
 
 export default App;
