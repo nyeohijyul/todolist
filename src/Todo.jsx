@@ -19,9 +19,9 @@ function Todo() {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    console.log("todos: 변경", todos);
-    return () => console.log("cleanup");
-  }, []);
+    console.log("todos: ", todos);
+    // return () => console.log("cleanup");
+  }, [todos]);
 
   const handleIsDone = (index) => {
     const updated = [...todos];
