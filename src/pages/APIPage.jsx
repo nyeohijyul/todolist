@@ -5,9 +5,9 @@ function ApiPage() {
     const [isError, setIsError] = useState(false);
     useEffect(() => {
         const tryApiRequest = async () => {
-        try {
-            // 일부러 존재하지 않는 API 주소로 요청해서 실패 흐름을 확인합니다.
-            await axios.get("https://example.invalid/todos");
+            try {
+                // 일부러 존재하지 않는 API 주소로 요청해서 실패 흐름을 확인합니다.
+                await axios.get("https://example.invalid/todos");
             } catch {
                 // 요청이 실패하면 실패 상태를 true로 바꿔 화면에 "실패"를 표시합니다.
                 setIsError(true);

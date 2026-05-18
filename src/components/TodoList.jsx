@@ -29,50 +29,52 @@ function Todo({ todos, onTodoClick, onAddTodo }) {
   const handlePriorityChange = (e) => {
     setPriority(e.target.value);
   };
-  const [filter, setFilter] = useState("all");
-  const addTodo = ()=>{
-    if (input) {
-      let id = todos[todos.length - 1].id + 1;
-      let tmp = [...todos];
-      tmp.push({id, text: input, priority, done: false});
-      onAddTodo(tmp[tmp.length - 1]);
-      setInput('');
+//   const [filter, setFilter] = useState("all");
+//   const addTodo = ()=>{
+//     if (input) {
+//       let id = todos[todos.length - 1].id + 1;
+//       let tmp = [...todos];
+//       tmp.push({id, text: input, priority, done: false});
+//       onAddTodo(tmp[tmp.length - 1]);
+//       setInput('');
 
-    }
-  }
-  const filterTodo = () => {
-    switch (filter) {
-      case 'done':
-        return todos.filter(item => item.done);
-        break;
-      case 'notDone':
-        return todos.filter(item => !item.done);
-        break;
-      default:
-        return todos;
-        break;
-    }
-  }
+//     }
+//   }
+//   const filterTodo = () => {
+//     switch (filter) {
+//       case 'done':
+//         return todos.filter(item => item.done);
+//         break;
+//       case 'notDone':
+//         return todos.filter(item => !item.done);
+//         break;
+//       default:
+//         return todos;
+//         break;
+//     }
+//   }
   return (
     <section>
         <section className="toggles">
-          <input id="newTask" type="text" placeholder="할 일을 입력하세요." value={input} onChange={handleInputChange} onKeyDown={(e)=>{if(e.key == 'Enter') addTodo();}}></input>
+          {/* <input id="newTask" type="text" placeholder="할 일을 입력하세요." value={input} onChange={handleInputChange} onKeyDown={(e)=>{if(e.key == 'Enter') addTodo();}}></input> */}
           <section className="radios">
             <label><input type="radio" name="priority" value='HIGH' className={priority === "HIGH" ? 'selected' : null} onChange={handlePriorityChange}/>HIGH</label>
             <label><input type="radio" name="priority" value='MEDIUM' className={priority === "MEDIUM" ? 'selected' : null} onChange={handlePriorityChange}/>MEDIUM</label>
             <label><input type="radio" name="priority" value='LOW' className={priority === "LOW" ? 'selected' : null} onChange={handlePriorityChange}/>LOW</label>
-            <button onClick={addTodo}>추가</button>
+            <button onClick={(e) => onAddTodo(...[ e, priority ])}>추가</button>
           </section>
 
-          <section className="filters">
+          {/* <section className="filters">
             <button className={filter === "all" ? 'selected' : null} onClick={()=>setFilter('all')}>전체</button>
             <button className={filter === "done" ? 'selected' : null} onClick={()=>setFilter('done')}>완료</button>
             <button className={filter === "notDone" ? 'selected' : null} onClick={()=>setFilter('notDone')}>미완료</button>
-          </section>
+          </section> */}
         </section>
         <ul>
-            {filterTodo().map(item => (
-                <li key={item.id} onClick={() => handleIsDone(item.id)} className={item.done? 'selected' : null}><span className={item.priority}>{item.priority}</span><span>{item.done ? '✅' : '📝'}</span><span className="item-text">{item.text}</span></li>
+            {/* {filterTodo().map(item => ( */}
+            {todos.map(item => (
+                // <li key={item.id} onClick={() => handleIsDone(item.id)} className={item.done? 'selected' : null}><span className={item.priority}>{item.priority}</span><span>{item.done ? '✅' : '📝'}</span><span className="item-text">{item.text}</span></li>
+                <li key={item.id} onClick={() => onTodoClick(item.id)} className={item.done? 'selected' : null}><span className={item.priority}>{item.priority}</span><span>{item.done ? '✅' : '📝'}</span><span className="item-text">{item.text}</span></li>
             ))}
         </ul>
     </section>
