@@ -112,7 +112,7 @@ code {
 /* li {
   list-style: none;
 } */
- * {
+* {
   box-sizing: border-box;
 }
 
@@ -148,21 +148,24 @@ h2 {
   margin-bottom: 18px;
   outline: none;
   transition: 0.2s;
+  &:focus {
+    border-color: #4f46e5;
+  }
 }
 
-#newTask:focus {
+/* #newTask:focus {
   border-color: #4f46e5;
-}
+} */
 
-label {
+/* label {
   margin-right: 14px;
   font-size: 14px;
   cursor: pointer;
-}
+} */
 
-input[type="radio"] {
+/* input[type="radio"] {
   margin-right: 6px;
-}
+} */
 
 button {
   border: none;
@@ -174,20 +177,40 @@ button {
   margin-top: 16px;
   transition: 0.2s;
   background: #e5e7eb;
+  &:hover {
+    transform: translateY(-1px);
+    background: #d1d5db;
+  }
+  &.selected {
+    background: #4f46e5;
+    color: white;
+  }
+
 }
 
-button:hover {
+/* button:hover {
   transform: translateY(-1px);
 }
 
 button.selected {
   background: #4f46e5;
   color: white;
+} */
+
+input {
+  &[type="radio"] {
+    display: none;
+    margin-right: 6px;
+  }
 }
 
-input.selected + * {
+/* input.selected + * {
   font-weight: bold;
 }
+
+input[type="radio"] {
+  display: none;
+} */
 
 ul {
   list-style: none;
@@ -196,7 +219,15 @@ ul {
 }
 
 li {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 4fr; */
+  @media (orientation: portrait) {
+    grid-template-columns: 1fr 1fr 4fr;
+  }
+  @media (orientation: landscape) {
+    grid-template-columns: 1fr 1fr 8fr;
+  }
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
@@ -206,13 +237,45 @@ li {
   cursor: pointer;
   transition: 0.2s;
   border: 1px solid #e5e7eb;
+  /* border: 1px solid; */
+  position: relative;
+  &:hover {
+    /* background: #eef2ff; */
+    &:has(.HIGH) { background: #ef444450; }
+    &:has(.MEDIUM) { background: #f59e0b50; }
+    &:has(.LOW) { background: #10b98150; }
+  }
+  &.selected {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      z-index: 10;
+    }
+    /* background: #4f46e550; */
+    /* &:has(.HIGH, .MEDIUM, .LOW) { opacity: 0.5; } */
+    &:has(.HIGH) { background: #ef444450; }
+    &:has(.MEDIUM) { background: #f59e0b50; }
+    &:has(.LOW) { background: #10b98150; }
+  }
+  /* &:has(.HIGH) { border-color: #ef4444; }
+  &:has(.MEDIUM) { border-color: #f59e0b; }
+  &:has(.LOW) { border-color: #10b981; } */
 }
 
-li:hover {
+/* li:hover {
   background: #eef2ff;
-}
+} */
 
 label {
+  /* margin-right: 14px;
+  font-size: 14px;
+  cursor: pointer; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -225,21 +288,73 @@ label {
   font-weight: 600;
   margin-right: 10px;
   user-select: none;
+  &:hover {
+    background: #d1d5db;
+    transform: translateY(-1px);
+  }
+  &:has(input[value="HIGH"]) { color: #ef4444; }
+  &:has(input[value="MEDIUM"]) { color: #f59e0b; }
+  &:has(input[value="LOW"]) { color: #10b981; }
+  &:has(input[type="radio"]:checked) {
+    /* background: #4f46e5; */
+    &:has(input[value="HIGH"]) { background: #ef4444; }
+    &:has(input[value="MEDIUM"]) { background: #f59e0b; }
+    &:has(input[value="LOW"]) { background: #10b981; }
+    color: white;
+  }
 }
 
-label:hover {
+/* label:hover {
   transform: translateY(-1px);
 }
 
-/* radio 기본 동그라미 숨기기 */
-input[type="radio"] {
-  display: none;
-}
-
-/* 선택된 버튼 스타일 */
 label:has(input[type="radio"]:checked) {
   background: #4f46e5;
   color: white;
+} */
+
+/* section {
+  &.toggles {
+    display: grid;
+    @media (orientation: portrait) {
+      grid-template-areas: "input input" "radios filters";
+    }
+    @media (orientation: landscape) {
+      grid-template-areas: "input radios" "filters .";
+    }
+  }
+  input { grid-area: input; align-self: center; }
+  .radios { grid-area: radios; }
+  .filters { grid-area: filters; }
+} */
+
+span {
+  &:not(.item-text) {
+    display: block;
+    margin: auto;
+  }
+  &.item-text {
+    justify-self: start;
+  }
+  &.HIGH, &.MEDIUM, &.LOW {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 999px;
+    color: white;
+  }
+  &.HIGH { background: #ef4444; }
+  &.MEDIUM { background: #f59e0b; }
+  &.LOW { background: #10b981; }
+}
+
+/* span:not(.item-text) {
+  display: block;
+  margin: auto;
+}
+
+span.item-text {
+  justify-self: start;
 }
 
 span.HIGH,
@@ -262,4 +377,4 @@ span.MEDIUM {
 
 span.LOW {
   background: #10b981;
-}
+} */
