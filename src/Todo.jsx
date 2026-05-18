@@ -26,6 +26,7 @@ function Todo() {
       console.log(tmp);
       setTodos(tmp);
       setInput('');
+      
     }
   }
   const filterTodo = () => {
