@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Todo({ todos, onTodoClick, onAddTodo }) {
+function Todo({ todos, onTodoClick, onAddTodo, sectionTitle }) {
 //   const [todos, setTodos] = useState(() => {
 //     const savedTodos = localStorage.getItem("todos");
 //     return savedTodos ? JSON.parse(savedTodos) : [
@@ -10,11 +10,11 @@ function Todo({ todos, onTodoClick, onAddTodo }) {
 //     ];
 //   });
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-    console.log("todos: ", todos);
-    // return () => console.log("cleanup");
-  }, [todos]);
+//   useEffect(() => {
+//     localStorage.setItem("todos", JSON.stringify(todos));
+//     console.log("todos: ", todos);
+//     // return () => console.log("cleanup");
+//   }, [todos]);
 
   const handleIsDone = (index) => {
     const updated = [...todos];
@@ -70,6 +70,7 @@ function Todo({ todos, onTodoClick, onAddTodo }) {
             <button className={filter === "notDone" ? 'selected' : null} onClick={()=>setFilter('notDone')}>미완료</button>
           </section> */}
         </section>
+        <h4>{sectionTitle}</h4>
         <ul>
             {/* {filterTodo().map(item => ( */}
             {todos.map(item => (

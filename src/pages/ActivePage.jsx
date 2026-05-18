@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TodoList from "../components/TodoList";
-function CompletedPage({ todos, onTodoClick, onAddTodo }) {
+function ActivePage({ todos, onTodoClick, onAddTodo }) {
     // input에 입력한 할 일 내용을 state로 관리합니다.
     const [todoText, setTodoText] = useState("");
     // form이 제출되면 새 Todo 객체를 만들어 App.jsx로 전달합니다.
@@ -23,8 +23,8 @@ function CompletedPage({ todos, onTodoClick, onAddTodo }) {
         // 추가가 끝나면 input 값을 비워 다음 입력을 받을 수 있게 합니다.
         setTodoText("");
     };
-    // 기존 Todo 배열에서 완료된 Todo만 filter로 골라 완료 페이지에 보여줍니다.
-    const completedTodos = todos.filter((todo) => todo.done);
+    // 기존 Todo 배열에서 완료되지 않은 Todo만 filter로 골라 활성 페이지에 보여줍니다.
+    const activeTodos = todos.filter((todo) => !todo.done);
     return (
         <>
             <input
@@ -35,11 +35,11 @@ function CompletedPage({ todos, onTodoClick, onAddTodo }) {
                 placeholder="새 할 일을 입력하세요"
             />
             <TodoList
-                sectionTitle="완료된 할 일"
-                todos={completedTodos}
+                sectionTitle="남은 할 일"
+                todos={activeTodos}
                 onTodoClick={onTodoClick}
                 onAddTodo={handleAddTodo}
             />
         </>);
 }
-export default CompletedPage;
+export default ActivePage;

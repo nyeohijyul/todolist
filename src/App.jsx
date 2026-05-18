@@ -14,12 +14,13 @@ import Navigation from "./components/Navigation";
 import TodoHeader from "./components/TodoHeader";
 import ApiPage from "./pages/ApiPage";
 import CompletedPage from "./pages/CompletedPage";
+import ActivePage from "./pages/ActivePage";
 import TodosPage from "./pages/TodosPage";
 import { todos } from "./data/todos";
 function App() {
   // Todo 목록 state입니다. localStorage에 저장된 값이 있으면 그 값을 먼저 불러옵니다.
   const [todoItems, setTodoItems] = useState(() => {
-  const savedTodos = localStorage.getItem("todos");
+    const savedTodos = localStorage.getItem("todos");
     return savedTodos ? JSON.parse(savedTodos) : todos;
   });
   // Todo 목록이 바뀔 때마다 localStorage에 저장해 새로고침 후에도 유지합니다.
@@ -58,7 +59,12 @@ function App() {
       />
       <Route
         path="/completed" element={
-          <CompletedPage todos={todoItems} onTodoClick={handleTodoClick} />
+          <CompletedPage todos={todoItems} onTodoClick={handleTodoClick} onAddTodo={handleAddTodo} />
+        }
+      />
+      <Route
+        path="/active" element={
+          <ActivePage todos={todoItems} onTodoClick={handleTodoClick} onAddTodo={handleAddTodo} />
         }
       />
       <Route path="/api" element={<ApiPage />} />
